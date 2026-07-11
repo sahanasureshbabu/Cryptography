@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+
+int getLevel(char level[])
+{
+    if(strcmp(level, "Public") == 0)
+        return 1;
+    if(strcmp(level, "Confidential") == 0)
+        return 2;
+    if(strcmp(level, "Secret") == 0)
+        return 3;
+    if(strcmp(level, "TopSecret") == 0)
+        return 4;
+
+    return 0;
+}
+
+int main()
+{
+    char userLevel[20], fileLevel[20], operation[10];
+
+    printf("Enter User Security Level (Public/Confidential/Secret/TopSecret): ");
+    scanf("%s", userLevel);
+
+    printf("Enter File Security Level: ");
+    scanf("%s", fileLevel);
+
+    printf("Enter Operation (Read/Write): ");
+    scanf("%s", operation);
+
+    int user = getLevel(userLevel);
+    int file = getLevel(fileLevel);
+
+    if(strcmp(operation, "Read") == 0)
+    {
+        if(user >= file)
+            printf("Access Allowed\n");
+        else
+            printf("Access Denied\nReason: No Read Up\n");
+    }
+    else if(strcmp(operation, "Write") == 0)
+    {
+        if(user <= file)
+            printf("Access Allowed\n");
+        else
+            printf("Access Denied\nReason: No Write Down\n");
+    }
+    else
+    {
+        printf("Invalid Operation\n");
+    }
+
+    return 0;
+}
