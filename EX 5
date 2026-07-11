@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <time.h>
+
+void caesar(char text[], int key)
+{
+    for(int i=0;text[i];i++)
+    {
+        if(isalpha(text[i]))
+            text[i]=((toupper(text[i])-'A'+key)%26)+'A';
+    }
+}
+
+void mono(char text[], char key[])
+{
+    for(int i=0;text[i];i++)
+    {
+        if(isalpha(text[i]))
+            text[i]=key[toupper(text[i])-'A'];
+    }
+}
+
+void vigenere(char text[], char key[])
+{
+    int j=0,len=strlen(key);
+
+    for(int i=0;text[i];i++)
+    {
+        if(isalpha(text[i]))
+        {
+            text[i]=((toupper(text[i])-'A'+toupper(key[j%len])-'A')%26)+'A';
+            j++;
+        }
+    }
+}
+
+void hill(char text[], int key[2][2])
+{
+    int i;
+    for(i=0;text[i+1];i+=2)
+    {
+        int a=toupper(text[i])-'A';
+        int b=toupper(text[i+1])-'A';
+
+        text[i]=((key[0][0]*a+key[0][1]*b)%26)+'A';
+        text[i+1]=((key[1][0]*a+key[1][1]*b)%26)+'A';
+    }
+}
+
+int main()
+{
+    char plain[100];
+    char c1[100],c2[100],c3[100],c4[100];
+
+    char monoKey[]="QWERTYUIOPASDFGHJKLZXCVBNM";
+    char vigKey[]="KEY";
+
+    int hillKey[2][2]={{3,3},{2,5}};
+
+    printf("Enter Plaintext (Even length for Hill): ");
+    gets(plain);
+
+    strcpy(c1,plain);
+    strcpy(c2,plain);
+    strcpy(c3,plain);
+    strcpy(c4,plain);
+
+    clock_t start,end;
+
+    start=clock();
+    caesar(c1,3);
+    end=clock();
+    double t1=(double)(end-start)/CLOCKS_PER_SEC;
+
+    start=clock();
+    mono(c2,monoKey);
+    end=clock();
+    double t2=(double)(end-start)/CLOCKS_PER_SEC;
+
+    start=clock();
+    vigenere(c3,vigKey);
+    end=clock();
+    double t3=(double)(end-start)/CLOCKS_PER_SEC;
+
+    start=clock();
+    hill(c4,hillKey);
+    end=clock();
+    double t4=(double)(end-start)/CLOCKS_PER_SEC;
+
+    printf("\n---------------------------------------------------------------\n");
+    printf("Cipher\t\tCiphertext\t\tTime(sec)\n");
+    printf("---------------------------------------------------------------\n");
+    printf("Caesar\t\t%s\t\t%.6f\n",c1,t1);
+    printf("Monoalphabetic\t%s\t\t%.6f\n",c2,t2);
+    printf("Vigenere\t%s\t\t%.6f\n",c3,t3);
+    printf("Hill\t\t%s\t\t%.6f\n",c4,t4);
+    printf("---------------------------------------------------------------\n");
+
+    return 0;
+}
