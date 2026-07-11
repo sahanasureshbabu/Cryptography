@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main()
+{
+    char text[100], key[20], matrix[20][20];
+    int order[20], used[20] = {0};
+
+    printf("Enter Plaintext: ");
+    gets(text);
+
+    printf("Enter Keyword: ");
+    gets(key);
+
+    int len = strlen(text);
+    int cols = strlen(key);
+    int rows = (len + cols - 1) / cols;
+
+    while (len < rows * cols)
+        text[len++] = 'X';
+    text[len] = '\0';
+
+    int k = 0;
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            matrix[i][j] = text[k++];
+
+    for (int i = 0; i < cols; i++)
+    {
+        int min = -1;
+        for (int j = 0; j < cols; j++)
+        {
+            if (!used[j] && (min == -1 || key[j] < key[min]))
+                min = j;
+        }
+        order[i] = min;
+        used[min] = 1;
+    }
+
+    printf("\nKeyword Ranking:\n");
+    for (int i = 0; i < cols; i++)
+        printf("%c ", key[order[i]]);
+
+    printf("\n\nOriginal Matrix:\n");
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+            printf("%c ", matrix[i][j]);
+        printf("\n");
+    }
+
+    printf("\nEncrypted Text: ");
+    for (int i = 0; i < cols; i++)
+    {
+        int c = order[i];
+        for (int j = 0; j < rows; j++)
+            printf("%c", matrix[j][c]);
+    }
+
+    return 0;
+}
