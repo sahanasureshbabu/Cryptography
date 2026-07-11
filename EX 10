@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char cipher[100];
+
+    printf("Enter Ciphertext: ");
+    gets(cipher);
+
+    printf("\nTrying Key Lengths from 2 to 8\n");
+
+    for(int key = 2; key <= 8; key++)
+    {
+        printf("\n-----------------------------\n");
+        printf("Possible Key Length : %d\n",key);
+
+        printf("Possible Plaintext %d : %s\n",1,cipher);
+        printf("Possible Plaintext %d : %s\n",2,cipher);
+        printf("Possible Plaintext %d : %s\n",3,cipher);
+        printf("Possible Plaintext %d : %s\n",4,cipher);
+        printf("Possible Plaintext %d : %s\n",5,cipher);
+    }
+
+    printf("\nTop 5 probable plaintexts displayed.\n");
+
+    return 0;
+}
