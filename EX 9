@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+void transpose(char text[], int cols)
+{
+    char matrix[20][20];
+    char temp[100];
+
+    int len = strlen(text);
+    int rows = (len + cols - 1) / cols;
+
+    while (len < rows * cols)
+        text[len++] = 'X';
+    text[len] = '\0';
+
+    int k = 0;
+
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            matrix[i][j] = text[k++];
+
+    k = 0;
+
+    for (int j = 0; j < cols; j++)
+        for (int i = 0; i < rows; i++)
+            temp[k++] = matrix[i][j];
+
+    temp[k] = '\0';
+    strcpy(text, temp);
+}
+
+int main()
+{
+    char text[100];
+    int key1, key2;
+
+    printf("Enter Plaintext: ");
+    gets(text);
+
+    printf("Enter First Key (Columns): ");
+    scanf("%d", &key1);
+
+    printf("Enter Second Key (Columns): ");
+    scanf("%d", &key2);
+
+    transpose(text, key1);
+
+    printf("\nAfter First Transposition: %s\n", text);
+
+    transpose(text, key2);
+
+    printf("After Second Transposition: %s\n", text);
+
+    printf("\nSecurity Comparison:\n");
+    printf("Single Transposition : Moderate Security\n");
+    printf("Double Transposition : Higher Security due to two permutations.\n");
+
+    return 0;
+}
