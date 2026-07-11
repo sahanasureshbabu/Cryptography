@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[100];
+    char rail[10][100];
+    char cipher[100];
+    int rails;
+
+    printf("Enter Plaintext: ");
+    gets(text);
+
+    printf("Enter Number of Rails: ");
+    scanf("%d",&rails);
+
+    int len=strlen(text);
+
+    for(int i=0;i<rails;i++)
+        for(int j=0;j<len;j++)
+            rail[i][j]='\n';
+
+    int row=0,dir=1;
+
+    for(int i=0;i<len;i++)
+    {
+        rail[row][i]=text[i];
+
+        if(row==0)
+            dir=1;
+        else if(row==rails-1)
+            dir=-1;
+
+        row+=dir;
+    }
+
+    printf("\nRail Matrix:\n");
+
+    for(int i=0;i<rails;i++)
+    {
+        for(int j=0;j<len;j++)
+        {
+            if(rail[i][j]=='\n')
+                printf(" ");
+            else
+                printf("%c",rail[i][j]);
+        }
+        printf("\n");
+    }
+
+    int k=0;
+
+    for(int i=0;i<rails;i++)
+        for(int j=0;j<len;j++)
+            if(rail[i][j]!='\n')
+                cipher[k++]=rail[i][j];
+
+    cipher[k]='\0';
+
+    printf("\nEncrypted Text: %s\n",cipher);
+
+    printf("\nTime Complexity : O(n)\n");
+
+    return 0;
+}
