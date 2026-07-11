@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[100];
+    int cols;
+
+    printf("Enter Plaintext: ");
+    gets(text);
+
+    printf("Enter Number of Columns: ");
+    scanf("%d",&cols);
+
+    int len=strlen(text);
+
+    while(len%cols!=0)
+    {
+        text[len++]='X';
+    }
+
+    text[len]='\0';
+
+    int rows=len/cols;
+
+    char mat[20][20];
+
+    int k=0;
+
+    for(int i=0;i<rows;i++)
+    {
+        for(int j=0;j<cols;j++)
+        {
+            mat[i][j]=text[k++];
+        }
+    }
+
+    printf("\nMatrix:\n");
+
+    for(int i=0;i<rows;i++)
+    {
+        for(int j=0;j<cols;j++)
+            printf("%c ",mat[i][j]);
+        printf("\n");
+    }
+
+    printf("\nEncrypted Text: ");
+
+    for(int j=0;j<cols;j++)
+    {
+        for(int i=0;i<rows;i++)
+            printf("%c",mat[i][j]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
