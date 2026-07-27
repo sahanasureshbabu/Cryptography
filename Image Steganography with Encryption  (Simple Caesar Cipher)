@@ -1,0 +1,35 @@
+#include<stdio.h>
+
+#include<string.h>
+
+
+
+int main()
+
+{
+
+    char text[100];
+
+    int i,key=3;
+
+
+
+    printf("Enter Message: ");
+
+    gets(text);
+
+
+
+    for(i=0;text[i]!='\0';i++)
+
+        text[i]=text[i]+key;
+
+
+
+    printf("Encrypted Message: %s",text);
+
+
+
+    return 0;
+
+}
