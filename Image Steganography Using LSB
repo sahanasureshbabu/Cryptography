@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+
+
+int main() {
+
+    FILE *img = fopen("input.bmp", "rb");
+
+    FILE *out = fopen("output.bmp", "wb");
+
+
+
+    if (!img || !out) {
+
+        printf("File Error\n");
+
+        return 1;
+
+    }
+
+
+
+    char message[] = "HELLO";
+
+    unsigned char byte;
+
+    int i = 0, bit = 0;
+
+
+
+    while (fread(&byte, 1, 1, img)) {
+
+        if (message[i] != '\0') {
+
+            byte = (byte & 0xFE) | ((message[i] >> (7 - bit)) & 1);
+
+            bit++;
+
+            if (bit == 8) {
+
+                bit = 0;
+
+                i++;
+
+            }
+
+        }
+
+        fwrite(&byte, 1, 1, out);
+
+    }
+
+
+
+    fclose(img);
+
+    fclose(out);
+
+
+
+    printf("Message Embedded Successfully");
+
+    return 0;
+
+}
