@@ -1,0 +1,37 @@
+#include<stdio.h>
+
+
+
+int main()
+
+{
+
+    FILE *audio=fopen("audio.wav","rb");
+
+
+
+    if(audio==NULL)
+
+    {
+
+        printf("File not found");
+
+        return 0;
+
+    }
+
+
+
+    printf("Audio File Loaded Successfully\n");
+
+    printf("Text can be hidden using LSB of audio samples.");
+
+
+
+    fclose(audio);
+
+
+
+    return 0;
+
+}
