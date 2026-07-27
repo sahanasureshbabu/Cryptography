@@ -1,0 +1,27 @@
+#include<stdio.h>
+
+
+
+int main()
+
+{
+
+    printf("Technique 1 : LSB\n");
+
+    printf("Capacity     : High\n");
+
+    printf("Security     : Medium\n\n");
+
+
+
+    printf("Technique 2 : Transform Domain\n");
+
+    printf("Capacity     : Medium\n");
+
+    printf("Security     : High\n");
+
+
+
+    return 0;
+
+}
