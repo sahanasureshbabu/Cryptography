@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+#include<string.h>
+
+
+
+int main()
+
+{
+
+    char msg[]="SecretMessage";
+
+
+
+    printf("Part1: ");
+
+    for(int i=0;i<7;i++)
+
+        printf("%c",msg[i]);
+
+
+
+    printf("\nPart2: ");
+
+    for(int i=7;i<strlen(msg);i++)
+
+        printf("%c",msg[i]);
+
+
+
+    return 0;
+
+}
