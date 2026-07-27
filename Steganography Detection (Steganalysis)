@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+
+
+int main()
+
+{
+
+    int hidden;
+
+
+
+    printf("Enter 1 if hidden data detected else 0: ");
+
+    scanf("%d",&hidden);
+
+
+
+    if(hidden)
+
+        printf("Stego Image Detected");
+
+    else
+
+        printf("Normal Image");
+
+
+
+    return 0;
+
+}
