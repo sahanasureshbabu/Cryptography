@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+#include<math.h>
+
+
+
+int main()
+
+{
+
+    float mse,psnr;
+
+
+
+    printf("Enter MSE Value: ");
+
+    scanf("%f",&mse);
+
+
+
+    psnr=10*log10((255*255)/mse);
+
+
+
+    printf("PSNR = %.2f dB",psnr);
+
+
+
+    return 0;
+
+}
